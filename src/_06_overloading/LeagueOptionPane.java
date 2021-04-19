@@ -106,7 +106,7 @@ public class LeagueOptionPane {
 		//	1. Create another showMessageDialog() method that lets us choose the Message, Title, Image, and Background Color
 		//     3 String parameters (one for the message, one for the title, and one for the fileName)
 		//	   1 Color parameter for the backgroundColor
-	public static void showMessageDialog(String message, String title, String imageName, Color color) {
+	public static JPanel showMessageDialog(String message, String title, String imageName, Color color) {
 		JFrame frame = new JFrame();
 		frame.setVisible(true);
 		frame.setTitle(title);
@@ -126,6 +126,8 @@ public class LeagueOptionPane {
 		frame.pack();
 		
 		frame.setLocationRelativeTo(null);
+		
+		return panel;
 	
 	}
 		//			
