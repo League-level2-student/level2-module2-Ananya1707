@@ -92,6 +92,7 @@ public class IntroToTimers extends JPanel implements ActionListener, KeyListener
 			else {
 				time = maxTime;
 			}
+			
 		}
 		
 	}
