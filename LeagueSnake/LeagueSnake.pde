@@ -50,8 +50,6 @@ void dropFood() {
    
 }
 
-
-
 //*
 // ***** DRAW METHODS *****
 // These methods are used to draw the snake and its food 
@@ -77,6 +75,7 @@ void drawSnake() {
   //Draw the head of the snake followed by its tail
   fill(0,255,0);
   rect(head.x,head.y, 10,10);
+  manageTail();
 }
 
 
@@ -88,11 +87,10 @@ void drawSnake() {
 void drawTail() {
   //Draw each segment of the tail 
   for(int i = 0; i < tail.size(); i++){
+    Segment segment = tail.get(i);
     fill(0,255,0);
-    rect(head.x,head.y, 10,10);
-    
+    rect(segment.x,segment.y, 10,10);    
   }    
-
 }
 
 void manageTail() {
@@ -102,17 +100,22 @@ void manageTail() {
   drawTail();
   Segment s = new Segment(head.x,head.y);
   tail.add(s);
-  tail.remove(1);
+  tail.remove(0);
   
 }
 
 void checkTailCollision() {
   //If the snake crosses its own tail, shrink the tail back to one segment
-  
-  
+  for(int i = 0; i < tail.size(); i++){
+    Segment segment = tail.get(i);
+    if(head.x == segment.x && head.y == segment.y ){
+      foodEaten = 1;
+      tail.clear();
+      Segment s = new Segment(head.x,head.y);
+      tail.add(s);
+    }    
+  }  
 }
-
-
 
 //*
 // ***** CONTROL METHODS *****
@@ -186,7 +189,9 @@ void eat() {
   //When the snake eats the food, its tail should grow and more food appear
   if(foodX == head.x && foodY == head.y){
     foodEaten += 1;
-    dropFood();    
+    dropFood(); 
+    Segment s = new Segment(head.x,head.y);
+    tail.add(s);
   }
 
 }
